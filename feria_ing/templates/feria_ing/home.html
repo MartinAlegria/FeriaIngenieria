@@ -1,0 +1,16 @@
+
+{% extends "feria_ing/base.html" %}
+{% block content %}
+    {% for project in projects %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                Categoria: <a class="mr-2" href="#">{{ project.categoria }}</a>
+              <small class="text-muted">Evaluaciones: {{ project.evaluaciones }}</small>
+            </div>
+            <h2><a class="article-title" >{{ project.nombre }}</a></h2>
+            <p class="article-content">{{ project.descripcion }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
