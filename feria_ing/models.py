@@ -1,7 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Categoria(models.Model):
+    abreviacion = models.CharField(max_length=7, primary_key=True)
+    nombre = models.CharField(max_length=100)
+    num_proyectos = models.IntegerField()
+
+    def __str__(self):
+        return self.nombre
 
 class Project(models.Model):
     #KEY
@@ -9,18 +16,13 @@ class Project(models.Model):
     nombre = models.CharField(max_length=140)
     descripcion = models.TextField()
     #FOREIGN KEY
-    categoria = models.CharField(max_length=140)
+    categoria = models.OneToOneField(
+        Categoria,
+        on_delete = models.SET_NULL,
+        null = True
+    )
     requierements = models.CharField(max_length=140)
     evaluaciones = models.IntegerField()
 
     def __str__(self):
         return self.nombre
-
-class Evaluacion(models.Model):
-    #KEY
-    id_proyecto = models.ForeignKey(Project, on_delete = models.CASCADE)
-    #FOREIGN KEY
-    matricula = models.ForeignKey(User, on_delete = models.CASCADE)
-
-    def __str__(self):
-        return self.id_proyecto
