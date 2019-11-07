@@ -1,0 +1,13 @@
+{% extends "feria_ing/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+            <h2 class="account-heading">{{nombres}} {{apellidos}}</h2>
+            <p class="text-secondary">{{ carrera }}</p>
+            </div>
+        </div>
+        <!-- FORM HERE -->
+    </div>
+{% endblock content %}

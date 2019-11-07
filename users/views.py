@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Alumno, Profesor
 from . import forms
 
@@ -31,8 +32,8 @@ def register(request):
                     alumno.save()
                     form.save()
                     print("ALUMNO GUARDADO")
-                    messages.success(request, f'La cuenta fue creada correctamente para {nombres} {apellidos}')
-                    return redirect('feria_ing-home')
+                    messages.success(request, f'La cuenta fue creada correctamente para {nombres} {apellidos}. Ya puedes iniciar sesion!')
+                    return redirect('login')
 
                 else: #ES PROFE
                     nombres = form.cleaned_data.get('nombres')
@@ -55,3 +56,19 @@ def register(request):
     else:
         form = forms.SignUpForm()
     return render(request, 'users/register.html', {'form':form})
+
+@login_required
+def profile(request):
+    user = request.user
+    mat = user.username.split('@')[0]
+    query = Alumno.objects.filter(matricula = mat)
+    nom = query.first().nombres
+    ape = query.first().apellidos
+    carr = query.first().carrera
+
+    context = {
+        'nombres': nom,
+        'apellidos': ape,
+        'carrera': carr
+    }
+    return render(request, 'users/profile.html', context)

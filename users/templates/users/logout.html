@@ -1,0 +1,9 @@
+{% extends "feria_ing/base2.html" %}
+{% block content %}
+    <h2> Acabas de cerrar tu sesion</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            <a class="ml-2" href="{% url 'login' %}">Inicia Sesion</a>
+        </small>
+    </div>
+{% endblock content %}
