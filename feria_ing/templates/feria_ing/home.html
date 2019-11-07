@@ -1,11 +1,11 @@
 
 {% extends "feria_ing/base.html" %}
 {% block content %}
-
-  <button type="button" class="btn btn-primary btn-lg">Large button</button>
-  <button type="button" class="btn btn-primary btn-lg">Large button</button>
-  <button type="button" class="btn btn-primary btn-lg">Large button</button>
-
+<h5> Busca un projecto </h5>
+  <form method="GET" action = "{% url 'feria_ing-search' %}">
+      <input name = "q" class="form-control" type="text" placeholder="Search" aria-label="Search">
+  </form>
+  <br>
     {% for project in projects %}
         <article class="media content-section">
           <div class="media-body">
@@ -13,7 +13,7 @@
                 Categoria: <a class="mr-2" href="#">{{ project.categoria }}</a>
               <small class="text-muted">Evaluaciones: {{ project.evaluaciones }}</small>
             </div>
-            <h2><a class="article-title" >{{ project.nombre }}</a></h2>
+            <h2><a class="article-title" href="#">{{ project.nombre }}</a></h2>
             <p class="article-content">{{ project.descripcion }}</p>
           </div>
         </article>
