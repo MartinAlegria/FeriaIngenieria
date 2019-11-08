@@ -25,6 +25,17 @@ def home(request):
 class ProjectDetailView(DetailView):
     model = Project
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        alum = []
+        list_al = Alumno.objects.all()
+        project_id = self.kwargs['pk']
+        for al in list_al:
+            if al.proyecto_id == project_id:
+                alum.append(al)
+        context['alumnos'] = alum
+        return context
+
 
 def search_bar(request):
     query = request.GET.get('q')

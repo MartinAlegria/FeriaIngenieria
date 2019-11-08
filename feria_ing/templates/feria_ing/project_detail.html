@@ -5,11 +5,18 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-                Categoria: <a class="mr-2">{{ object.categoria }}</a>
+                Categoria: <a class="mr-2">{{ object.categorias }}</a>
               <small class="text-muted">Evaluaciones: {{ object.evaluaciones }}</small>
             </div>
             <h2>{{ object.nombre }}</h2>
             <p class="article-content">{{ object.descripcion }}</p>
+            <h5>Integrantes: </h5>
+
+            <ul class="list-group list-group-flush">
+                {%for alumno in alumnos%}
+                <li class="list-group-item">{{alumno.nombres}} {{alumno.apellidos}} &emsp; {{alumno.carrera}}</li>
+                {% endfor %}
+              </ul>
           </div>
         </article>
 {% endblock content %}
