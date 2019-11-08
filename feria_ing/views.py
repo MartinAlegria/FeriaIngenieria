@@ -30,10 +30,16 @@ class ProjectDetailView(DetailView):
         alum = []
         list_al = Alumno.objects.all()
         project_id = self.kwargs['pk']
+        ld_user = self.request.user
+        mat = ld_user.username.split('@')[0]
+        current_user = None
         for al in list_al:
+            if al.matricula == mat:
+                current_user = al
             if al.proyecto_id == project_id:
                 alum.append(al)
         context['alumnos'] = alum
+        context['user_current'] = current_user
         return context
 
 

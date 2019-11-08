@@ -6,7 +6,11 @@
           <div class="media-body">
             <div class="article-metadata">
                 Categoria: <a class="mr-2">{{ object.categorias }}</a>
+                <br>
               <small class="text-muted">Evaluaciones: {{ object.evaluaciones }}</small>
+              {% if user_current.proyecto == None %}
+              &emsp;<button type="button" class="btn btn-primary">Unirse Al Projecto</button>
+              {% endif %}
             </div>
             <h2>{{ object.nombre }}</h2>
             <p class="article-content">{{ object.descripcion }}</p>
@@ -14,7 +18,9 @@
 
             <ul class="list-group list-group-flush">
                 {%for alumno in alumnos%}
-                <li class="list-group-item">{{alumno.nombres}} {{alumno.apellidos}} &emsp; {{alumno.carrera}}</li>
+                <li class="list-group-item">{{alumno.nombres}} {{alumno.apellidos}} &emsp; {{alumno.carrera}}
+                    &emsp; {{alumno.matricula}}
+                </li>
                 {% endfor %}
               </ul>
           </div>
