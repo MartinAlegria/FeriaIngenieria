@@ -1,0 +1,15 @@
+
+{% extends "feria_ing/base.html" %}
+{% block content %}
+  <br>
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                Categoria: <a class="mr-2">{{ object.categoria }}</a>
+              <small class="text-muted">Evaluaciones: {{ object.evaluaciones }}</small>
+            </div>
+            <h2>{{ object.nombre }}</h2>
+            <p class="article-content">{{ object.descripcion }}</p>
+          </div>
+        </article>
+{% endblock content %}

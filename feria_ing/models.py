@@ -9,14 +9,13 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nombre
-
 class Project(models.Model):
     #KEY
     id = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=140)
     descripcion = models.TextField()
     #FOREIGN KEY
-    categoria = models.OneToOneField(
+    categorias = models.ForeignKey(
         Categoria,
         on_delete = models.SET_NULL,
         null = True
@@ -26,3 +25,4 @@ class Project(models.Model):
 
     def __str__(self):
         return self.nombre
+

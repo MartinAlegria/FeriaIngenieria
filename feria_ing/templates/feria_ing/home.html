@@ -13,7 +13,7 @@
                 Categoria: <a class="mr-2" href="#">{{ project.categoria }}</a>
               <small class="text-muted">Evaluaciones: {{ project.evaluaciones }}</small>
             </div>
-            <h2><a class="article-title" href="#">{{ project.nombre }}</a></h2>
+            <h2><a class="article-title" href="{% url 'project-detail' project.id %}">{{ project.nombre }}</a></h2>
             <p class="article-content">{{ project.descripcion }}</p>
           </div>
         </article>
