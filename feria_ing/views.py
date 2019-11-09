@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import Project, Categoria
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from users.models import Alumno, Profesor
 from django.views.generic import (
@@ -19,16 +20,29 @@ from django.views.generic import (
 @login_required
 def home(request):
     list_al = Alumno.objects.all()
+    prof_list = Profesor.objects.all()
     ld_user = request.user
     mat = ld_user.username.split('@')[0]
+    print(mat)
     current_user = None
+
     for al in list_al:
             if al.matricula == mat:
                 current_user = al
+    #No encuentra alumno, entonces es prof
+    if current_user:
+        type = True #Es alumno
+    else:
+        type= False
+
+    for prof in prof_list:
+        if prof.matricula == mat:
+                current_user = prof
 
     context = {
         'projects': Project.objects.all(),
-        'user_current': current_user
+        'user_current': current_user,
+        'type': type
     }
     return render(request, 'feria_ing/home.html', context)
 
@@ -39,21 +53,34 @@ class ProjectDetailView(DetailView):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         alum = []
         list_al = Alumno.objects.all()
+        prof_list = Profesor.objects.all()
         project_id = self.kwargs['pk']
         ld_user = self.request.user
         self.request.session['pk'] = project_id
         mat = ld_user.username.split('@')[0]
         current_user = None
+
         for al in list_al:
             if al.matricula == mat:
                 current_user = al
             if al.proyecto_id == project_id:
                 alum.append(al)
+
+        if current_user:
+            type = True #Es alumno
+        else:
+            type= False #Es prof
+
+        for prof in prof_list:
+            if prof.matricula == mat:
+                current_user = prof
+
         context['alumnos'] = alum
         context['user_current'] = current_user
+        context['type'] = type
         return context
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(LoginRequiredMixin,CreateView):
     model = Project
     fields = ['nombre', 'descripcion', 'categorias', 'requierements']
 

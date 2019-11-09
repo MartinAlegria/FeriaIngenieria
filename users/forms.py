@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class SignUpForm(UserCreationForm):
     nombres = forms.CharField(max_length=140,required=True)
     apellidos = forms.CharField(max_length=140,required=True)
-    carrera = forms.CharField(max_length=5, required=False)
+    carrera = forms.CharField(max_length=5, required=False, label='Carrera (si eres prof, deja esto en blanco)')
     username = forms.CharField(max_length=100, label= 'Email (usa tu correo institucional)')
 
     class Meta:

@@ -40,7 +40,7 @@ def register(request):
                     apellidos = form.cleaned_data.get('apellidos')
 
                     profe = Profesor(matricula = matricula, 
-                    nombres = nombres, apellidos = apellidos)
+                    nombres = nombres, apellidos = apellidos, profe = True)
 
                     profe.save()
                     form.save()
