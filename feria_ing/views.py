@@ -53,6 +53,28 @@ class ProjectDetailView(DetailView):
         context['user_current'] = current_user
         return context
 
+class ProjectCreateView(CreateView):
+    model = Project
+    fields = ['nombre', 'descripcion', 'categorias', 'requierements']
+
+    def form_valid(self, form):
+        last_id = Project.objects.last().id
+        new_id = last_id +1
+        form.instance.id = new_id
+        form.instance.evaluaciones = 0
+
+        ld_user = self.request.user
+        mat = ld_user.username.split('@')[0]
+        list_al = Alumno.objects.filter(matricula = mat)
+        alumno = list_al.first()
+        print(form.instance)
+        projecto = form.instance
+        projecto.save()
+        alumno.proyecto = projecto
+        alumno.save()
+        return super(ProjectCreateView, self).form_valid(form)
+    
+
 
 @login_required
 def unirse_proyecto(request):
