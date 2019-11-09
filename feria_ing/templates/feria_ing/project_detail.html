@@ -9,7 +9,10 @@
                 <br>
               <small class="text-muted">Evaluaciones: {{ object.evaluaciones }}</small>
               {% if user_current.proyecto == None %}
-              &emsp;<a class="btn btn-primary " href="{% url 'unirse_proyecto'%}">Unirse Al Projecto</a>
+              &emsp;<a class="btn btn-primary " href="{% url 'unirse_proyecto'%}" onclick="return confirm('Seguro que quieres unirte a este proyecto ?')">Unirse Al Projecto</a>
+              {% endif %}
+              {% if user_current.proyecto == object %}
+              &emsp; <a class="btn btn-danger" style="color: white;" href="{% url 'salir-proyecto'%}" onclick="return confirm('Seguro que quieres salir de este proyecto ?')">Salir de este Projecto</a>
               {% endif %}
             </div>
             <h2>{{ object.nombre }}</h2>

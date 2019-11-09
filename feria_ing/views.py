@@ -18,8 +18,17 @@ from django.views.generic import (
 
 @login_required
 def home(request):
+    list_al = Alumno.objects.all()
+    ld_user = request.user
+    mat = ld_user.username.split('@')[0]
+    current_user = None
+    for al in list_al:
+            if al.matricula == mat:
+                current_user = al
+
     context = {
         'projects': Project.objects.all(),
+        'user_current': current_user
     }
     return render(request, 'feria_ing/home.html', context)
 
@@ -44,6 +53,7 @@ class ProjectDetailView(DetailView):
         context['user_current'] = current_user
         return context
 
+
 @login_required
 def unirse_proyecto(request):
     ld_user = request.user
@@ -60,8 +70,22 @@ def unirse_proyecto(request):
     messages.success(request, f'{alumno.nombres} {alumno.apellidos} se ha unido al proyecto {project_object.nombre}!')
     return redirect('feria_ing-home')
 
+@login_required
+def salir_projecto(request):
+    ld_user = request.user
+    project_id = request.session.get('pk', None)
+    mat = ld_user.username.split('@')[0]
+    list_al = Alumno.objects.filter(matricula = mat)
+    project_object = Project.objects.filter(id = project_id).first()
+    print(project_object)
+    alumno = list_al.first()
+    print(alumno)
+    alumno.proyecto = None
+    alumno.save()
 
-    
+    messages.success(request, f'{alumno.nombres} {alumno.apellidos} ha salido del proyecto proyecto {project_object.nombre} :(')
+    return redirect('feria_ing-home')
+
     
 
 @login_required

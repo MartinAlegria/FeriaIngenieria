@@ -60,7 +60,10 @@
             <h3 style="text-align: center">Menu</h3>
             <p class='text-muted'>
               <ul class="list-group">
-                <button type="button" class="btn btn-success list-group-item list-group-item-success" style="text-align:left;">Crear Nuevo Proyecto</button>                <a class="list-group-item list-group-item-light" href="#" >Leaderboard</a>
+                {% if user_current.proyecto == None %}
+                <button type="button" class="btn btn-success list-group-item list-group-item-success" style="text-align:left;">Crear Nuevo Proyecto</button>                
+                {% endif %}
+                <a class="list-group-item list-group-item-light" href="#" >Leaderboard</a>
                 <div class="dropdown list-group">
                     <button class="btn btn-secondary dropdown-toggle list-group-item list-group-item-light" type="button" id="dropdownMenuButton" 
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:left;">
