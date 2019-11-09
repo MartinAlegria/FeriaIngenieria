@@ -9,7 +9,7 @@
                 <br>
               <small class="text-muted">Evaluaciones: {{ object.evaluaciones }}</small>
               {% if user_current.proyecto == None %}
-              &emsp;<button type="button" class="btn btn-primary">Unirse Al Projecto</button>
+              &emsp;<a class="btn btn-primary " href="{% url 'unirse_proyecto'%}">Unirse Al Projecto</a>
               {% endif %}
             </div>
             <h2>{{ object.nombre }}</h2>
