@@ -32,7 +32,7 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {%if user.is_authenticated %}
-              <a class="nav-item nav-link" href="{% url 'profile' %}">{{user.username}}</a>
+              <a class="nav-item nav-link" href="{% url 'profile' %}">{{user_current.nombres}} {{user_current.apellidos}}</a>
               <a class="nav-item nav-link" href="{% url 'logout' %}">Cerrar Sesion</a>
               {%else%}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Iniciar Sesion</a>
@@ -61,9 +61,15 @@
             <p class='text-muted'>
               <ul class="list-group">
                 {% if user_current.proyecto == None %}
-                <button type="button" class="btn btn-success list-group-item list-group-item-success" style="text-align:left;">Crear Nuevo Proyecto</button>                
+                <a class="list-group-item list-group-item-success">Crear Nuevo Proyecto</a>                
                 {% endif %}
+
+                {% if user_current.proyecto %}
+                <a class="list-group-item list-group-item-success"  href="{% url 'project-detail' user_current.proyecto.id %}" >Mi Proyecto</a>
+                {% endif %}
+
                 <a class="list-group-item list-group-item-light" href="#" >Leaderboard</a>
+                
                 <div class="dropdown list-group">
                     <button class="btn btn-secondary dropdown-toggle list-group-item list-group-item-light" type="button" id="dropdownMenuButton" 
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-align:left;">
