@@ -57,6 +57,7 @@ def register(request):
         form = forms.SignUpForm()
     return render(request, 'users/register.html', {'form':form})
 
+
 @login_required
 def profile(request):
     user = request.user

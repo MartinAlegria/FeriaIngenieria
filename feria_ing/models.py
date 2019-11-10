@@ -10,6 +10,7 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nombre
+
 class Project(models.Model):
     #KEY
     id = models.IntegerField(primary_key=True)
@@ -29,4 +30,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={'pk': self.pk})
+        
+
 

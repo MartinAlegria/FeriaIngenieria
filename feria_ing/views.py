@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.db.models import Q
+from users import forms
+from users.forms import EvaluationForm
 from .models import Project, Categoria
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
@@ -152,5 +154,24 @@ def search_bar(request):
         return render(request, 'feria_ing/home.html', context)
     else:
         return render(request, 'feria_ing/home.html')
+
+def evauluar(request):
+    form = forms.EvaluationForm(request.POST)
+    project_id = request.session.get('pk', None)
+    project = Project.objects.filter(id = project_id).first()
+
+    if request.method == 'POST':
+        form = forms.EvaluationForm(request.POST)
+        planteamiento = request.POST['ejecucion']
+        planteamiento = int(planteamiento)
+        ejecucion = request.POST['ejecucion1']
+        ejecucion = int(ejecucion)
+        presentacion = request.POST['ejecucion2']
+        presentacion = int(presentacion)
+
+        calif = presentacion + ejecucion + presentacion
+        project.evaluaciones = calif
+        
+    return render(request, 'users/evaluar.html', {'form':form, 'project': project})
     
 

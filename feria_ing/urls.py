@@ -7,6 +7,7 @@ urlpatterns = [
     path('unirse/', views.unirse_proyecto, name='unirse_proyecto'),
     path('salir/', views.salir_projecto, name='salir-proyecto'),
     path('search/', views.search_bar, name="feria_ing-search"),
+    path('evaluar/', views.evauluar, name ='evaluar'),
     path('project/new/', ProjectCreateView.as_view(), name="project-create"),
-    path('project/<int:pk>/', ProjectDetailView.as_view(), name="project-detail")
+    path('project/<int:pk>/', ProjectDetailView.as_view(), name="project-detail"),
 ]

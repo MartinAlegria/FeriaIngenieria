@@ -4,6 +4,25 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+from .models import Evaluacion
+
+class EvaluationForm(forms.ModelForm):
+    OPTIONS = (
+        ("1", "1"),
+        ("2", "2"),
+        ("3", "3"),
+        ("4", "4"),
+        )
+    planteamiento = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                         choices=OPTIONS)
+    ejecucion = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                         choices=OPTIONS)
+    presentacion = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                         choices=OPTIONS)
+    
+    class Meta:
+        model = Evaluacion
+        fields = []
 
 class SignUpForm(UserCreationForm):
     nombres = forms.CharField(max_length=140,required=True)
