@@ -20,7 +20,9 @@ def register(request):
             if ("@itesm.mx" in email) or ("@tec.mx" in email):
 
                 matricula = email.split('@')[0]
-                if matricula[0].upper() == 'A': #ES ALUMNO
+                matricula = matricula.upper()
+                ##CAMBIAR A QUE SEA A01
+                if 'A0' in matricula: #ES ALUMNO
                     nombres = form.cleaned_data.get('nombres')
                     apellidos = form.cleaned_data.get('apellidos')
                     carrera = form.cleaned_data.get('carrera')
@@ -29,6 +31,7 @@ def register(request):
                     alumno = Alumno(matricula = matricula, 
                     nombres = nombres, apellidos = apellidos, proyecto = None, carrera = carrera)
 
+                    print(alumno)
                     alumno.save()
                     form.save()
                     print("ALUMNO GUARDADO")

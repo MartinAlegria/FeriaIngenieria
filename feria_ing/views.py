@@ -7,7 +7,7 @@ from users.forms import EvaluationForm
 from .models import Project, Categoria
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from users.models import Alumno, Profesor
+from users.models import Alumno, Profesor, Evaluacion
 from django.views.generic import (
     ListView,
     DetailView,
@@ -54,12 +54,16 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
         alum = []
+
         list_al = Alumno.objects.all()
         prof_list = Profesor.objects.all()
+
         project_id = self.kwargs['pk']
         ld_user = self.request.user
         self.request.session['pk'] = project_id
         mat = ld_user.username.split('@')[0]
+        eva_list =  Evaluacion.objects.all().filter(proyecto = project_id, profesor = mat)
+
         current_user = None
 
         for al in list_al:
@@ -76,10 +80,16 @@ class ProjectDetailView(DetailView):
         for prof in prof_list:
             if prof.matricula == mat:
                 current_user = prof
+            
+        if eva_list:    
+            evaluated = True
+        else:
+            evaluated = False
 
         context['alumnos'] = alum
         context['user_current'] = current_user
         context['type'] = type
+        context['evaluated'] = evaluated
         return context
 
 class ProjectCreateView(LoginRequiredMixin,CreateView):
@@ -159,6 +169,9 @@ def evauluar(request):
     form = forms.EvaluationForm(request.POST)
     project_id = request.session.get('pk', None)
     project = Project.objects.filter(id = project_id).first()
+    ld_user = request.user
+    mat = ld_user.username.split('@')[0]
+    profe = Profesor.objects.filter(matricula = mat).first()
 
     if request.method == 'POST':
         form = forms.EvaluationForm(request.POST)
@@ -169,8 +182,18 @@ def evauluar(request):
         presentacion = request.POST['ejecucion2']
         presentacion = int(presentacion)
 
-        calif = presentacion + ejecucion + presentacion
-        project.evaluaciones = calif
+        print(planteamiento,ejecucion,presentacion)
+
+        calif = planteamiento + ejecucion + presentacion
+        project.evaluaciones += calif
+        evaluacion = Evaluacion(proyecto = project, profesor = profe)
+        evaluacion.save()
+        print(calif,project,project, evaluacion)
+        project.save()
+        evaluacion.save()
+
+        messages.success(request, f'Has calificado el proyecto {project.nombre}, con {calif}!')
+        return redirect('feria_ing-home')
         
     return render(request, 'users/evaluar.html', {'form':form, 'project': project})
     

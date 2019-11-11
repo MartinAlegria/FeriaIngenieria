@@ -24,10 +24,12 @@ class Evaluacion(models.Model):
     proyecto = models.ForeignKey(
         Project,
         on_delete = models.CASCADE,
-        null = False
+        null = False,
+        default = None
     )
     profesor = models.ForeignKey(
         Profesor,
         on_delete = models.CASCADE,
-        null = False
+        null = False,
+        default = None
     )

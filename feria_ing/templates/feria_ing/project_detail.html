@@ -5,8 +5,7 @@
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-                Categoria: <a class="mr-2">{{ object.categorias }}</a>
-                <br>
+                <h5 class="mr-2"> Categoria:  {{ object.categorias }}</h5>
               <small class="text-muted">Evaluaciones: {{ object.evaluaciones }}</small>
               {% if type  %}
                 {% if user_current.proyecto == None %}
@@ -17,7 +16,9 @@
                 {% endif %}
               {% else %}
                 {% if user_current.profe == True %}
+                  {% if evaluated == False%}
                               &emsp; <a class="btn btn-success" style="color: white;" href="{% url 'evaluar'%}" >Evaluar este Proyecto</a>
+                  {% endif %}
                 {% endif %}
               {%endif%}
 
