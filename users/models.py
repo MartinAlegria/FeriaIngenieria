@@ -33,3 +33,4 @@ class Evaluacion(models.Model):
         null = False,
         default = None
     )
+    calificacion = models.IntegerField(null=False)

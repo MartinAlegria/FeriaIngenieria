@@ -11,8 +11,6 @@
           <div class="media-body">
             <div class="article-metadata">
                 Categoria: {{ project.categorias }}
-                <br>
-              <small class="text-muted" >Calificacion: {{ project.evaluaciones }}</small>
             </div>
             <h2><a class="article-title" href="{% url 'project-detail' project.id %}">{{ project.nombre }}</a></h2>
             <p class="article-content">{{ project.descripcion }}</p>

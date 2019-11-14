@@ -6,7 +6,7 @@
           <div class="media-body">
             <div class="article-metadata">
                 <h5 class="mr-2"> Categoria:  {{ object.categorias }}</h5>
-              <small class="text-muted">Calificaciones: {{ object.evaluaciones }}</small>
+              <small class="text-muted">Promedio Calificaciones: {{ calificacion }}</small>
               {% if type  %}
                 {% if user_current.proyecto == None %}
                 &emsp;<a class="btn btn-primary " href="{% url 'unirse_proyecto'%}" onclick="return confirm('Seguro que quieres unirte a este proyecto ?')">Unirse Al Projecto</a>
