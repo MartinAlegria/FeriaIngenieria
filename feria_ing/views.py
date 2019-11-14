@@ -88,6 +88,7 @@ class ProjectDetailView(DetailView):
             evaluated = True
         else:
             evaluated = False
+            numero_ev = 1
 
         numero_ev = project.evaluaciones/numero_ev
 
@@ -114,6 +115,10 @@ class ProjectCreateView(LoginRequiredMixin,CreateView):
         alumno = list_al.first()
         print(form.instance)
         projecto = form.instance
+        cat = form.instance.categorias
+        num_proyectos = cat.num_proyectos + 1
+        cat.num_proyectos = num_proyectos
+        cat.save()
         projecto.save()
         alumno.proyecto = projecto
         alumno.save()
@@ -150,6 +155,13 @@ def salir_projecto(request):
     alumno.proyecto = None
     alumno.save()
 
+    al_proy = Alumno.objects.filter(proyecto = project_object)
+    if al_proy.count() == 0:
+        cat = Categoria.objects.get(abreviacion = project_object.categorias.abreviacion)
+        cat.num_proyectos -= 1
+        cat.save()
+        project_object.delete()
+        
     messages.success(request, f'{alumno.nombres} {alumno.apellidos} ha salido del proyecto proyecto {project_object.nombre} :(')
     return redirect('feria_ing-home')
 
@@ -192,7 +204,7 @@ def evauluar(request):
 
         calif = planteamiento + ejecucion + presentacion
         project.evaluaciones += calif
-        evaluacion = Evaluacion(proyecto = project, profesor = profe)
+        evaluacion = Evaluacion(proyecto = project, profesor = profe, calificacion = calif)
         evaluacion.save()
         print(calif,project,project, evaluacion)
         project.save()
@@ -202,5 +214,9 @@ def evauluar(request):
         return redirect('feria_ing-home')
         
     return render(request, 'users/evaluar.html', {'form':form, 'project': project})
+
+
+def leaderboard(request):
+        return render(request, 'feria_ing/leaderboard.html')
     
 
