@@ -1,21 +1,98 @@
 
 {% extends "feria_ing/base.html" %}
 {% block content %}
-<h1> AÑJDKLASJDKLASKLJL </h1>
-<h5> Busca un projecto </h5>
-  <form method="GET" action = "{% url 'feria_ing-search' %}">
-      <input name = "q" class="form-control" type="text" placeholder="Search" aria-label="Search">
-  </form>
+<h1> LEADERBOARD </h1>
   <br>
-    {% for project in projects %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                Categoria: {{ project.categorias }}
-            </div>
-            <h2><a class="article-title" href="{% url 'project-detail' project.id %}">{{ project.nombre }}</a></h2>
-            <p class="article-content">{{ project.descripcion }}</p>
-          </div>
-        </article>
-    {% endfor %}
+    <article class="media content-section">
+            <table class="table" style="text-align: center;">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Proyecto</th>
+                        <th scope="col">Calificacion Promedio</th>
+                        <th scope="col">Categoria</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+        
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>{{projects.0.nombre}}</td>
+                        <td>{{califs.0}}</td>
+                        <td>{{projects.0.categorias}}</td>
+                      </tr>
+
+                      <tr>
+                            <th scope="row">2</th>
+                            <td>{{projects.1.nombre}}</td>
+                            <td>{{califs.1}}</td>
+                            <td>{{projects.1.categorias}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>{{projects.2.nombre}}</td>
+                            <td>{{califs.2}}</td>
+                            <td>{{projects.2.categorias}}</td>
+                        </tr>
+                        
+                        <tr>
+                                <th scope="row">3</th>
+                                <td>{{projects.2.nombre}}</td>
+                                <td>{{califs.2}}</td>
+                                <td>{{projects.2.categorias}}</td>
+                        </tr>
+
+                        <tr>
+                                <th scope="row">4</th>
+                                <td>{{projects.3.nombre}}</td>
+                                <td>{{califs.3}}</td>
+                                <td>{{projects.3.categorias}}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>{{projects.4.nombre}}</td>
+                                <td>{{califs.4}}</td>
+                                <td>{{projects.4.categorias}}</td>
+                                </tr>
+
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>{{projects.5.nombre}}</td>
+                                <td>{{califs.5}}</td>
+                                <td>{{projects.5.categorias}}</td>
+                                </tr>
+
+                            <tr>
+                                <th scope="row">7</th>
+                                <td>{{projects.6.nombre}}</td>
+                                <td>{{califs.6}}</td>
+                                <td>{{projects.6.categorias}}</td>
+                            </tr>
+                     
+                            <tr>
+                                <th scope="row">8</th>
+                                <td>{{projects.7.nombre}}</td>
+                                <td>{{califs.7}}</td>
+                                <td>{{projects.7.categorias}}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">9</th>
+                                <td>{{projects.8.nombre}}</td>
+                                <td>{{califs.8}}</td>
+                                <td>{{projects.8.categorias}}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">10</th>
+                                <td>{{projects.9.nombre}}</td>
+                                <td>{{califs.9}}</td>
+                                <td>{{projects.9.categorias}}</td>
+                            </tr>
+
+                    </tbody>
+                  </table>
+    </article>
 {% endblock content %}

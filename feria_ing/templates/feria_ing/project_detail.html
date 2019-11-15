@@ -26,8 +26,10 @@
             </div>
             <h2>{{ object.nombre }}</h2>
             <p class="article-content">{{ object.descripcion }}</p>
+            <h5>Requerimientos: </h5>
+            <p class="article-content">{{ object.requierements }}</p>
             <h5>Integrantes: </h5>
-
+            
             <ul class="list-group list-group-flush">
                 {%for alumno in alumnos%}
                 <li class="list-group-item">{{alumno.nombres}} {{alumno.apellidos}} &emsp; {{alumno.carrera}}

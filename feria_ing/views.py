@@ -1,3 +1,4 @@
+import operator
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
@@ -217,6 +218,61 @@ def evauluar(request):
 
 
 def leaderboard(request):
-        return render(request, 'feria_ing/leaderboard.html')
-    
 
+    #Hacer lista de proyectos ordenados por sus calificaciones
+    project_list = Project.objects.all()
+    project_dict = {}
+    for project in project_list:   
+        evas = Evaluacion.objects.all().filter(proyecto = project.id)
+        count = evas.count()
+        if count == 0:
+            count = 1
+        project_dict[project.id] = project.evaluaciones/count
+
+    sorted_projects = sorted(project_dict.items(), key=operator.itemgetter(1))
+    sorted_projects.reverse()
+    
+    projects_final = []
+    califs_final = []
+
+    #Pasar la lista de tuplas a lista de objects
+    for thing in sorted_projects:
+        proj = Project.objects.get(id = thing[0])
+        calif = thing[1]
+        projects_final.append(proj)
+        califs_final.append(calif)
+
+    
+    #Sacar el usuario
+    list_al = Alumno.objects.all()
+    prof_list = Profesor.objects.all()
+    ld_user = request.user
+    mat = ld_user.username.split('@')[0]
+    print(mat)
+    current_user = None
+
+    for al in list_al:
+            if al.matricula == mat:
+                current_user = al
+    #No encuentra alumno, entonces es prof
+    if current_user:
+        type = True #Es alumno
+    else:
+        type= False
+
+    for prof in prof_list:
+        if prof.matricula == mat:
+                current_user = prof
+
+    context = {
+        'projects': projects_final,
+        'user_current': current_user,
+        'type': type,
+        'califs': califs_final,
+        'range': range(1,11)
+    }
+
+    return render(request, 'feria_ing/leaderboard.html', context)
+
+
+    
