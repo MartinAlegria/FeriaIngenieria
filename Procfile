@@ -1,0 +1,1 @@
+web: gunicorn feria_ingenieria.wsgi
