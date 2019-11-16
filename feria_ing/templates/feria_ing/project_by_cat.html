@@ -1,0 +1,21 @@
+
+{% extends "feria_ing/base.html" %}
+{% block content %}
+<h2 style="text-align: center;"> {{name}} </h2>
+<h5 style="text-align: center;"> Número de Proyectos: {{count}} </h5>
+  <form method="GET" action = "{% url 'feria_ing-search' %}">
+      <input name = "q" class="form-control" type="text" placeholder="Search" aria-label="Search">
+  </form>
+  <br>
+    {% for project in projects %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+                Categoria: {{ project.categorias }}
+            </div>
+            <h2><a class="article-title" href="{% url 'project-detail' project.id %}">{{ project.nombre }}</a></h2>
+            <p class="article-content">{{ project.descripcion }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

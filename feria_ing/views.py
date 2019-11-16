@@ -274,5 +274,40 @@ def leaderboard(request):
 
     return render(request, 'feria_ing/leaderboard.html', context)
 
+def cat_projs(request, categoria):
+    proj_list_by_cat = Project.objects.filter(categorias = categoria)
+    count = proj_list_by_cat.count()
+    name = Categoria.objects.get(abreviacion = categoria)
+
+    list_al = Alumno.objects.all()
+    prof_list = Profesor.objects.all()
+    ld_user = request.user
+    mat = ld_user.username.split('@')[0]
+    print(mat)
+    current_user = None
+
+    for al in list_al:
+            if al.matricula == mat:
+                current_user = al
+    #No encuentra alumno, entonces es prof
+    if current_user:
+        type = True #Es alumno
+    else:
+        type= False
+
+    for prof in prof_list:
+        if prof.matricula == mat:
+                current_user = prof
+
+    context = {
+        'projects': proj_list_by_cat,
+        'user_current': current_user,
+        'type': type,
+        'name': name,
+        'count': count
+    }
+    return render(request, 'feria_ing/project_by_cat.html', context)
+
+
 
     

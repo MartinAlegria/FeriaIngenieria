@@ -69,6 +69,8 @@
                 {% endif %}
 
                 <a class="list-group-item list-group-item-light" href="{% url 'leaderboard'%}" >Leaderboard</a>
+
+                <!--- <a class="list-group-item list-group-item-light" href="#"  onclick="return alert('El Leaderboard no esta disponible en estos momentos')">Leaderboard</a> -->
                 
                 <div class="dropdown list-group">
                     <button class="btn btn-secondary dropdown-toggle list-group-item list-group-item-light" type="button" id="dropdownMenuButton" 
@@ -76,12 +78,12 @@
                       Categorias
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Ciencias Básicas</a>
-                      <a class="dropdown-item" href="#">Ingeniería Industrial</a>
-                      <a class="dropdown-item" href="#">Ingeniería Mecatrónica</a>
-                      <a class="dropdown-item" href="#">Ingeniería en Desarrollo Sustentable</a>
-                      <a class="dropdown-item" href="#">Tecnologías de Información y Computación</a>
-                      <a class="dropdown-item" href="#">Mecánica y Materiales Avanzados</a>
+                      <a class="dropdown-item" href="{% url 'categoria' 'CB'%}">Ciencias Básicas</a>
+                      <a class="dropdown-item" href="{% url 'categoria' 'IIS'%}">Ingeniería Industrial</a>
+                      <a class="dropdown-item" href="{% url 'categoria' 'IMT'%}">Ingeniería Mecatrónica</a>
+                      <a class="dropdown-item" href="{% url 'categoria' 'IDS'%}">Ingeniería en Desarrollo Sustentable</a>
+                      <a class="dropdown-item" href="{% url 'categoria' 'TIC'%}">Tecnologías de Información y Computación</a>
+                      <a class="dropdown-item" href="{% url 'categoria' 'MMA'%}">Mecánica y Materiales Avanzados</a>
                     </div>
                   </div>
               </ul>

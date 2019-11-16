@@ -66,13 +66,26 @@ def profile(request):
     user = request.user
     mat = user.username.split('@')[0]
     query = Alumno.objects.filter(matricula = mat)
-    nom = query.first().nombres
-    ape = query.first().apellidos
-    carr = query.first().carrera
+    query2 = Profesor.objects.filter(matricula = mat)
+    if query:
+        nom = query.first().nombres
+        ape = query.first().apellidos
+        carr = query.first().carrera
 
-    context = {
-        'nombres': nom,
-        'apellidos': ape,
-        'carrera': carr
-    }
+        context = {
+            'nombres': nom,
+            'apellidos': ape,
+            'carrera': carr
+         }
+
+    else:
+        nom = query2.first().nombres
+        ape = query2.first().apellidos
+
+        context = {
+            'nombres': nom,
+            'apellidos': ape,
+            'carrera': user.username
+         }
+
     return render(request, 'users/profile.html', context)

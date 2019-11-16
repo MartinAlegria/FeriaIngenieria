@@ -22,7 +22,7 @@ class Project(models.Model):
         on_delete = models.SET_NULL,
         null = True
     )
-    requierements = models.CharField(max_length=140)
+    requierements = models.CharField(max_length=140, verbose_name= ('Requerimientos'))
     evaluaciones = models.IntegerField()
 
     def __str__(self):

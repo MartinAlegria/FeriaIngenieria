@@ -11,4 +11,5 @@ urlpatterns = [
     path('leaderboard/', views.leaderboard, name ='leaderboard'),
     path('project/new/', ProjectCreateView.as_view(), name="project-create"),
     path('project/<int:pk>/', ProjectDetailView.as_view(), name="project-detail"),
+    path('categoria/<str:categoria>/', views.cat_projs, name="categoria"),
 ]
