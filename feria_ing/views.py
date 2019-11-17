@@ -105,8 +105,10 @@ class ProjectCreateView(LoginRequiredMixin,CreateView):
     fields = ['nombre', 'descripcion', 'categorias', 'requierements']
 
     def form_valid(self, form):
-        last_id = Project.objects.last().id
-        if not last_id:
+        last_proj = Project.objects.last()
+        if last_proj:
+            last_id = last_proj.id
+        else:
             last_id = 0
         new_id = last_id +1
         form.instance.id = new_id
