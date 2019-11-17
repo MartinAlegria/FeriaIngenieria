@@ -8,9 +8,6 @@ pylint = "*"
 
 [packages]
 django = "==2.1"
-gunicorn = "*"
-django-crispy-forms = "*"
-django-multiselectfield = "*"
 
 [requires]
 python_version = "3.7"
