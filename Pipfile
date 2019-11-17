@@ -8,6 +8,8 @@ pylint = "*"
 
 [packages]
 django = "==2.1"
+django-crispy-forms = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
