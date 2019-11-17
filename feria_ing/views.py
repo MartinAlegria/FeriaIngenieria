@@ -186,6 +186,7 @@ def search_bar(request):
     else:
         return render(request, 'feria_ing/home.html')
 
+@login_required
 def evauluar(request):
     form = forms.EvaluationForm(request.POST)
     project_id = request.session.get('pk', None)
@@ -219,6 +220,7 @@ def evauluar(request):
     return render(request, 'users/evaluar.html', {'form':form, 'project': project})
 
 
+@login_required
 def leaderboard(request):
 
     #Hacer lista de proyectos ordenados por sus calificaciones
@@ -276,6 +278,7 @@ def leaderboard(request):
 
     return render(request, 'feria_ing/leaderboard.html', context)
 
+@login_required
 def cat_projs(request, categoria):
     proj_list_by_cat = Project.objects.filter(categorias = categoria)
     count = proj_list_by_cat.count()
