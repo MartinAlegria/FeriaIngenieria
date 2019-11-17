@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&^*1n31ap7!x_cuc1&^$%0c@z3h@r)u6lzq_qg+(1bf#^xyko+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['expodic19-csf.herokuapp.com', '127.0.0.1']
 
