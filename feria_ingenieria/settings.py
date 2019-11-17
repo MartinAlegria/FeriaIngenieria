@@ -25,7 +25,7 @@ SECRET_KEY = '&^*1n31ap7!x_cuc1&^$%0c@z3h@r)u6lzq_qg+(1bf#^xyko+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://expodic-csf.herokuapp.com/']
 
 
 # Application definition
