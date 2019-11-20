@@ -2,7 +2,7 @@ from django.db import models
 from feria_ing.models import (Project)
 
 class Alumno(models.Model):
-    matricula = models.CharField(max_length=9,primary_key=True)
+    matricula = models.CharField(max_length=25,primary_key=True)
     nombres = models.CharField(max_length=140)
     apellidos = models.CharField(max_length=140)
     proyecto = models.ForeignKey(Project,on_delete=models.CASCADE, null =True)
