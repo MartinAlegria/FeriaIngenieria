@@ -43,6 +43,8 @@ def home(request):
     for prof in prof_list:
         if prof.matricula == mat:
                 current_user = prof
+
+    proj_list = []
     
     if not type:
         likes_list = Evaluacion.objects.filter(profesor = current_user)
@@ -54,7 +56,6 @@ def home(request):
 
         print('***********', proj_list)
 
-    proj_list = []
 
     context = {
         'projects': Project.objects.all(),
