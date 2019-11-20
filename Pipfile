@@ -23,6 +23,7 @@ Django = "==2.1"
 whitenoise = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
+qrcode = {extras = ["pil"],version = "*"}
 
 [requires]
 python_version = "3.7"
