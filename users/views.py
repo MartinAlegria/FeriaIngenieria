@@ -39,6 +39,7 @@ def register(request):
                     return redirect('login')
 
                 else: #ES PROFE
+                    matricula = matricula.lower()
                     nombres = form.cleaned_data.get('nombres')
                     apellidos = form.cleaned_data.get('apellidos')
 
