@@ -12,7 +12,7 @@ class Alumno(models.Model):
         return self.matricula
 
 class Profesor(models.Model):
-    matricula = models.CharField(max_length=25,primary_key=True)
+    matricula = models.CharField(max_length=29,primary_key=True)
     nombres = models.CharField(max_length=140)
     apellidos = models.CharField(max_length=140)
     profe = models.BooleanField(default=False)
