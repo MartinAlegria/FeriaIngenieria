@@ -14,8 +14,10 @@
                 &emsp; <a class="btn btn-danger" style="color: white;" href="{% url 'salir-proyecto'%}" onclick="return confirm('Seguro que quieres salir de este proyecto ?')">Salir de este Projecto</a>
                 {% endif %}
               {% else %}
-                {% if user_current.profe == True %}
+
+                {% if type == False %}
                   {% if evaluated == False%}
+                    <a class="btn btn-success" style="color: white;" href="{% url 'like' project.id%}">Me Gusta</a>
                   {% endif %}
                 {% endif %}
               {%endif%}

@@ -75,13 +75,10 @@ class ProjectDetailView(DetailView):
         prof_list = Profesor.objects.all()
 
         project_id = self.kwargs['pk']
-        project = Project.objects.get(id = project_id)
         ld_user = self.request.user
         self.request.session['pk'] = project_id
         mat = ld_user.username.split('@')[0]
         eva_list =  Evaluacion.objects.all().filter(proyecto = project_id, profesor = mat)
-        evas = Evaluacion.objects.all().filter(proyecto = project_id)
-        numero_ev = evas.count()
 
         current_user = None
 
@@ -104,15 +101,11 @@ class ProjectDetailView(DetailView):
             evaluated = True
         else:
             evaluated = False
-            numero_ev = 1
-
-        numero_ev = project.evaluaciones/numero_ev
 
         context['alumnos'] = alum
         context['user_current'] = current_user
         context['type'] = type
         context['evaluated'] = evaluated
-        context['calificacion'] = numero_ev
         return context
 
 class ProjectCreateView(LoginRequiredMixin,CreateView):
