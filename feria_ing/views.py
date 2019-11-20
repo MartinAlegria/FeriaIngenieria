@@ -1,4 +1,5 @@
 import operator
+import qrcode
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
@@ -315,6 +316,3 @@ def cat_projs(request, categoria):
     }
     return render(request, 'feria_ing/project_by_cat.html', context)
 
-
-
-    
