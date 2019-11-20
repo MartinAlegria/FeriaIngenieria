@@ -6,7 +6,6 @@
           <div class="media-body">
             <div class="article-metadata">
                 <h5 class="mr-2"> Categoria:  {{ object.categorias }}</h5>
-              <small class="text-muted">Promedio Calificaciones: {{ calificacion }}</small>
               {% if type  %}
                 {% if user_current.proyecto == None %}
                 &emsp;<a class="btn btn-primary " href="{% url 'unirse_proyecto'%}" onclick="return confirm('Seguro que quieres unirte a este proyecto ?')">Unirse Al Projecto</a>
@@ -17,8 +16,6 @@
               {% else %}
                 {% if user_current.profe == True %}
                   {% if evaluated == False%}
-                  <!--  <a class="btn btn-success" style="color: white;" href="#" onclick="return alert('No puedes evaluar en estos momentos')">Evaluar este Proyecto</a> -->
-                           <!--   &emsp; <a class="btn btn-success" style="color: white;" href="{% url 'evaluar'%}">Evaluar este Proyecto</a> -->
                   {% endif %}
                 {% endif %}
               {%endif%}

@@ -24,6 +24,7 @@ from django.views.generic import (
 def home(request):
     list_al = Alumno.objects.all()
     prof_list = Profesor.objects.all()
+
     ld_user = request.user
     mat = ld_user.username.split('@')[0]
     print(mat)
@@ -41,11 +42,24 @@ def home(request):
     for prof in prof_list:
         if prof.matricula == mat:
                 current_user = prof
+    
+    if not type:
+        likes_list = Evaluacion.objects.filter(profesor = current_user)
+        proj_list = []
+
+        for like in likes_list:
+            p = (like.proyecto)
+            proj_list.append(p)
+
+        print('***********', proj_list)
+
+    proj_list = []
 
     context = {
         'projects': Project.objects.all(),
         'user_current': current_user,
-        'type': type
+        'type': type,
+        'like_list': proj_list
     }
     return render(request, 'feria_ing/home.html', context)
 
@@ -189,37 +203,23 @@ def search_bar(request):
         return render(request, 'feria_ing/home.html')
 
 @login_required
-def evauluar(request):
-    form = forms.EvaluationForm(request.POST)
-    project_id = request.session.get('pk', None)
-    project = Project.objects.filter(id = project_id).first()
+def like(request, project_id):
+    #project_id = request.session.get('pk', None)
+    print(project_id)
+    project = Project.objects.get(id = project_id)
     ld_user = request.user
     mat = ld_user.username.split('@')[0]
     profe = Profesor.objects.filter(matricula = mat).first()
 
-    if request.method == 'POST':
-        form = forms.EvaluationForm(request.POST)
-        planteamiento = request.POST['ejecucion']
-        planteamiento = int(planteamiento)
-        ejecucion = request.POST['ejecucion1']
-        ejecucion = int(ejecucion)
-        presentacion = request.POST['ejecucion2']
-        presentacion = int(presentacion)
+    project.evaluaciones += 1
+    evaluacion = Evaluacion(proyecto = project, profesor = profe, calificacion = 1)
+    print('**********', project, profe)
+    evaluacion.save()
+    print('**************',project, evaluacion)
+    project.save()
 
-        print(planteamiento,ejecucion,presentacion)
-
-        calif = planteamiento + ejecucion + presentacion
-        project.evaluaciones += calif
-        evaluacion = Evaluacion(proyecto = project, profesor = profe, calificacion = calif)
-        evaluacion.save()
-        print(calif,project,project, evaluacion)
-        project.save()
-        evaluacion.save()
-
-        messages.success(request, f'Has calificado el proyecto {project.nombre}, con {calif}!')
-        return redirect('feria_ing-home')
-        
-    return render(request, 'users/evaluar.html', {'form':form, 'project': project})
+    messages.success(request, f'Te ha gustado el proyecto {project.nombre}!')
+    return redirect('feria_ing-home')
 
 
 @login_required

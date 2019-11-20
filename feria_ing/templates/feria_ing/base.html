@@ -19,7 +19,7 @@
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'feria_ing-home' %}">EXPODIC 2019 -- CSF</a>
+          <a class="navbar-brand mr-4" href="{% url 'feria_ing-home' %}">EXPODIC 2019 - CSF</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -67,10 +67,6 @@
                 {% if user_current.proyecto %}
                 <a class="list-group-item list-group-item-success"  href="{% url 'project-detail' user_current.proyecto.id %}" >Mi Proyecto</a>
                 {% endif %}
-
-                <!---<a class="list-group-item list-group-item-light" href="{% url 'leaderboard'%}" >Leaderboard</a>
-
-                 <a class="list-group-item list-group-item-light" href="#"  onclick="return alert('El Leaderboard no esta disponible en estos momentos')">Leaderboard</a> -->
                 
                 <div class="dropdown list-group">
                     <button class="btn btn-secondary dropdown-toggle list-group-item list-group-item-light" type="button" id="dropdownMenuButton" 
