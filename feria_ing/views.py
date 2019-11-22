@@ -32,7 +32,7 @@ def home(request):
     current_user = None
 
     for al in list_al:
-            if al.matricula == mat:
+            if al.matricula.upper() == mat.upper():
                 current_user = al
     #No encuentra alumno, entonces es prof
     if current_user:
