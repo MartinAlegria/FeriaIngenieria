@@ -84,7 +84,7 @@ class ProjectDetailView(DetailView):
         current_user = None
 
         for al in list_al:
-            if al.matricula == mat:
+            if al.matricula == mat.upper():
                 current_user = al
             if al.proyecto_id == project_id:
                 alum.append(al)
@@ -253,7 +253,7 @@ def leaderboard(request):
     current_user = None
 
     for al in list_al:
-            if al.matricula == mat:
+            if al.matricula == mat.upper():
                 current_user = al
     #No encuentra alumno, entonces es prof
     if current_user:
@@ -289,7 +289,7 @@ def cat_projs(request, categoria):
     current_user = None
 
     for al in list_al:
-            if al.matricula == mat:
+            if al.matricula == mat.upper():
                 current_user = al
     #No encuentra alumno, entonces es prof
     if current_user:
