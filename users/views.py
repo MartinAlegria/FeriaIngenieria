@@ -66,7 +66,7 @@ def register(request):
 def profile(request):
     user = request.user
     mat = user.username.split('@')[0]
-    query = Alumno.objects.filter(matricula = mat)
+    query = Alumno.objects.filter(matricula = mat.upper())
     query2 = Profesor.objects.filter(matricula = mat)
     if query:
         nom = query.first().nombres
