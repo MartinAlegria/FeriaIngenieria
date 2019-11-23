@@ -125,7 +125,7 @@ class ProjectCreateView(LoginRequiredMixin,CreateView):
 
         ld_user = self.request.user
         mat = ld_user.username.split('@')[0]
-        list_al = Alumno.objects.filter(matricula = mat)
+        list_al = Alumno.objects.filter(matricula = mat.upper())
         alumno = list_al.first()
         print(form.instance)
         projecto = form.instance
@@ -145,7 +145,7 @@ def unirse_proyecto(request):
     ld_user = request.user
     project_id = request.session.get('pk', None)
     mat = ld_user.username.split('@')[0]
-    list_al = Alumno.objects.filter(matricula = mat)
+    list_al = Alumno.objects.filter(matricula = mat.upper())
     project_object = Project.objects.filter(id = project_id).first()
     print(project_object)
     alumno = list_al.first()
@@ -161,7 +161,7 @@ def salir_projecto(request):
     ld_user = request.user
     project_id = request.session.get('pk', None)
     mat = ld_user.username.split('@')[0]
-    list_al = Alumno.objects.filter(matricula = mat)
+    list_al = Alumno.objects.filter(matricula = mat.upper())
     project_object = Project.objects.filter(id = project_id).first()
     print(project_object)
     alumno = list_al.first()
