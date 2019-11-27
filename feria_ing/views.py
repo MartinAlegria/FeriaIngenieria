@@ -228,7 +228,7 @@ def leaderboard(request):
         count = evas.count()
         if count == 0:
             count = 1
-        project_dict[project.id] = project.evaluaciones/count
+        project_dict[project.id] = project.evaluaciones
 
     sorted_projects = sorted(project_dict.items(), key=operator.itemgetter(1))
     sorted_projects.reverse()
