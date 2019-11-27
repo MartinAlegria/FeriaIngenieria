@@ -17,7 +17,7 @@
 
             {% if type == False %}
               {%if project not in like_list%} 
-               <a class="btn btn-success" style="color: white;" href="{ #}">Me Gusta</a>
+               <a class="btn btn-success" style="color: white;" href="{% url 'like' project.id%}">Me Gusta</a>
               {%endif%}
             {% endif %}
           </div>
