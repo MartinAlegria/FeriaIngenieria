@@ -250,13 +250,12 @@ def leaderboard(request):
     project_list = Project.objects.all()
     project_dict = {}
     for project in project_list:   
-        e = Evaluacion.objects.all().filter(proyecto = project.id)
-        evas = []
-        for thing in e:
-            if thing.profesor in valids:
-                ev = thing
-                evas.append(ev)
-        project_dict[project.id] = project.evaluaciones
+        evas = Evaluacion.objects.all().filter(proyecto = project.id)
+        count = 0
+        for ev in evas:
+            if ev.profesor in valids:
+                count += 1
+        project_dict[project.id] = count
 
     sorted_projects = sorted(project_dict.items(), key=operator.itemgetter(1))
     sorted_projects.reverse()
