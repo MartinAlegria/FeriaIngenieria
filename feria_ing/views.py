@@ -220,11 +220,42 @@ def like(request, project_id):
 @login_required
 def leaderboard(request):
 
+    valids = [
+        "samuel.rosas"
+        "juan.alvarez"
+        "mielias"
+        "carlos.rojo"
+        "jareyesretana"
+        "jlguzzi"
+        "rogelio.morales"
+        "jorger"
+        "hector_cervantes"
+        "rociosanchez"
+        "altellez"
+        "kvalenzuela"
+        "carolina.villagran"
+        "ariel.garcia"
+        "alpineda"
+        "aldo.flores"
+        "carlos.ortiz.alvarado"
+        "vlopez"
+        "rimendez"
+        "gsandova"
+        "fcolorado"
+        "leespinosa"
+        "emagamo"
+    ]
+
     #Hacer lista de proyectos ordenados por sus calificaciones
     project_list = Project.objects.all()
     project_dict = {}
     for project in project_list:   
-        evas = Evaluacion.objects.all().filter(proyecto = project.id)
+        e = Evaluacion.objects.all().filter(proyecto = project.id)
+        evas = []
+        for thing in e:
+            if thing.profesor in valids:
+                ev = thing
+                evas.append(ev)
         count = evas.count()
         if count == 0:
             count = 1
