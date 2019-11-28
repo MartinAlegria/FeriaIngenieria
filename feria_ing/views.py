@@ -256,9 +256,6 @@ def leaderboard(request):
             if thing.profesor in valids:
                 ev = thing
                 evas.append(ev)
-        count = evas.count()
-        if count == 0:
-            count = 1
         project_dict[project.id] = project.evaluaciones
 
     sorted_projects = sorted(project_dict.items(), key=operator.itemgetter(1))
