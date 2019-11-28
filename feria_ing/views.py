@@ -234,7 +234,7 @@ def leaderboard(request):
         "altellez",
         "kvalenzuela",
         "carolina.villagran",
-        "ariel.garcia"
+        "ariel.garcia",
         "alpineda",
         "aldo.flores",
         "carlos.ortiz.alvarado",
