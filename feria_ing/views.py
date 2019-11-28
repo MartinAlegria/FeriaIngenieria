@@ -250,7 +250,7 @@ def leaderboard(request):
     project_list = Project.objects.all()
     project_dict = {}
     for project in project_list:   
-        evas = Evaluacion.objects.all().filter(proyecto = project.id)
+        evas = Evaluacion.objects.filter(proyecto = project.id)
         count = 0
         for ev in evas:
             if str(ev.profesor) in valids:
