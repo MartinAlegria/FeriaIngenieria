@@ -221,28 +221,28 @@ def like(request, project_id):
 def leaderboard(request):
 
     valids = [
-        "samuel.rosas"
-        "juan.alvarez"
-        "mielias"
-        "carlos.rojo"
-        "jareyesretana"
-        "jlguzzi"
-        "rogelio.morales"
-        "jorger"
-        "hector_cervantes"
-        "rociosanchez"
-        "altellez"
-        "kvalenzuela"
-        "carolina.villagran"
+        "samuel.rosas",
+        "juan.alvarez",
+        "mielias",
+        "carlos.rojo",
+        "jareyesretana",
+        "jlguzzi",
+        "rogelio.morales",
+        "jorger",
+        "hector_cervantes",
+        "rociosanchez",
+        "altellez",
+        "kvalenzuela",
+        "carolina.villagran",
         "ariel.garcia"
-        "alpineda"
-        "aldo.flores"
-        "carlos.ortiz.alvarado"
-        "vlopez"
-        "rimendez"
-        "gsandova"
-        "fcolorado"
-        "leespinosa"
+        "alpineda",
+        "aldo.flores",
+        "carlos.ortiz.alvarado",
+        "vlopez",
+        "rimendez",
+        "gsandova",
+        "fcolorado",
+        "leespinosa",
         "emagamo"
     ]
 
